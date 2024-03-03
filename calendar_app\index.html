@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar App</title>
+</head>
+
+<body>
+    <h1>Calendar App</h1>
+    <form action="{{ url_for('add_event') }}" method="POST">
+        <label for="title">Event Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="description">Event Description:</label>
+        <textarea id="description" name="description" rows="4"></textarea>
+        <br>
+        <label for="start_time">Start Time:</label>
+        <input type="datetime-local" id="start_time" name="start_time" required>
+        <br>
+        <button type="submit">Add Event</button>
+    </form>
+
+    <h2>Event List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
